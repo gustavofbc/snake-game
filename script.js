@@ -6,6 +6,8 @@ snake[0] = {
     x: 8 * box,
     y: 8 * box
 }
+// direção em que a cobrinha percorre
+let direction = "right";
 
 function criarBG(){
     context.fillStyle = "lightgreen";   //definição da cor do elemento
@@ -19,5 +21,28 @@ function criarCobrinha(){
     }
 }
 
-criarBG();
-criarCobrinha();
+function iniciarJogo(){
+    criarBG();
+    criarCobrinha(); 
+
+    //setando os valores do array como sendo coordenadas
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    //coordenadas de direção da cobra
+    if(direction == 'right'){
+        snakeX += box;
+    }
+    if(direction == 'left'){
+        snakeX -= box;
+    }
+    if(direction == 'up'){
+        snakeY -= box
+    }
+    if(direction == 'down'){
+        snakeY += box;
+    }
+}
+
+//estou definindo um intervalo de 100ms p/ renovar o jogo
+let jogo = setInterval(iniciarJogo, 100);
