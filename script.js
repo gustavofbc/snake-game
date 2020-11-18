@@ -8,10 +8,14 @@ snake[0] = {
 }
 // direção em que a cobrinha percorre
 let direction = "right";
+let food = {
+    x: Math.floor(Math.random() * 15 + 1 ) * box,
+    y: Math.floor(Math.random() * 15 + 1 ) * box
+}
 
 function criarBG(){
     context.fillStyle = "lightgreen";   //definição da cor do elemento
-    context.fillRect(0,0,16 * box, 16 * box); //cria o retângulo em que o jogo será executado
+    context.fillRect(0, 0, 16 * box, 16 * box); //cria o retângulo em que o jogo será executado
 }
 
 function criarCobrinha(){
@@ -19,6 +23,11 @@ function criarCobrinha(){
         context.fillStyle = 'green';
         context.fillRect(snake[i].x, snake[i].y, box, box);
     }
+}
+
+function drawFood(){
+    context.fillStyle = 'red';
+    context.fillRect(food.x, food.y, box, box);
 }
 
 //criar evento de escuta para captar o valor das teclas digitadas
@@ -56,7 +65,8 @@ function iniciarJogo(){
     
 
     criarBG();
-    criarCobrinha(); 
+    criarCobrinha();
+    drawFood();
 
     //setando os valores do array como sendo coordenadas
     let snakeX = snake[0].x;
@@ -70,7 +80,7 @@ function iniciarJogo(){
         snakeX -= box;
     }
     if(direction == 'up'){
-        snakeY -= box
+        snakeY -= box;
     }
     if(direction == 'down'){
         snakeY += box;
