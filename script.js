@@ -35,7 +35,7 @@ document.addEventListener('keydown', update); //pega o evento de cliqueno teclad
 
 function update(event){
     if(event.keyCode == 37 && direction != 'right'){
-        direction != 'left';
+        direction = 'left';
     }
     if(event.keyCode == 38 && direction != 'down'){
         direction = 'up';
@@ -62,7 +62,14 @@ function iniciarJogo(){
     if(snake[0].y < 0 && direction == 'up'){
         snake[0].y = 16 * box;
     }
-    
+
+    //verificação de colisão da cobrinha com seu corpo
+    for(i = 1; i <snake.length; i++){
+        if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
+            clearInterval(jogo);
+            alert('Game over :(');
+        }
+    }
 
     criarBG();
     criarCobrinha();
